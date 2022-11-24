@@ -1,19 +1,22 @@
-import { emailCodec } from './email'
-import * as E from 'fp-ts/Either'
+import * as TE from 'fp-ts/TaskEither'
 import { pipe } from 'fp-ts/function'
+import { mapAll, getErrorMessage } from '@/config/tests/fixtures'
+import { emailCodec } from './email'
 
-it('should validate email correctly', () => {
-  pipe(
+it('Should validate the email properly', async () => {
+  return pipe(
     'john@doe.com',
     emailCodec.decode,
-    E.map((result) => expect(result).toBe('john@doe.com')),
-  )
+    TE.fromEither,
+    mapAll(result => expect(result).toBe('john@doe.com')),
+  )()
 })
 
-it('should return error when email invalid', () => {
-  pipe(
+it('Should not accept an invalid email', async () => {
+  return pipe(
     'invalid-email',
     emailCodec.decode,
-    E.mapLeft((error) => expect(error[0]?.message).toBe('Invalid email')),
-  )
+    TE.fromEither,
+    mapAll(errors => expect(getErrorMessage(errors)).toBe('Invalid email')),
+  )()
 })

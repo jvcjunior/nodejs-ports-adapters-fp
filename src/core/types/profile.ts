@@ -1,13 +1,11 @@
 import * as t from 'io-ts'
 import { withMessage, UUID } from 'io-ts-types'
-// import { slugCodec, urlCodec } from '@/core/types'
-import { slugCodec } from '@/core/types'
+import { slugCodec, urlCodec } from '@/core/types/scalar'
 
 export const profileCodec = t.type({
   username: slugCodec,
   bio: t.string,
-  //   image: urlCodec,
-  image: t.string,
+  image: urlCodec,
   following: t.boolean,
 })
 

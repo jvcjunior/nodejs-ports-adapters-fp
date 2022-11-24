@@ -1,21 +1,17 @@
 import * as t from 'io-ts'
-// import { withMessage, NonEmptyString } from 'io-ts-types'
-// import { profileCodec, authorIdOutputCodec } from '@/core/profile/types'
-// import { dateCodec, slugCodec } from '@/core/types'
-// import { slugCodec } from '@/core/types'
+import { withMessage, NonEmptyString } from 'io-ts-types'
+import { profileCodec, authorIdOutputCodec } from '@/core/types/profile'
+import { dateCodec, slugCodec } from '@/core/types/scalar'
 
 const commentCodecRequired = t.type({
   id: t.number,
-  createdAt: t.string,
-  updatedAt: t.string,
-  //   createdAt: dateCodec,
-  //   updatedAt: dateCodec,
+  createdAt: dateCodec,
+  updatedAt: dateCodec,
   body: t.string,
 })
 
 const commentCodecOptional = t.partial({
-  author: t.string,
-//   author: profileCodec,
+  author: profileCodec,
 })
 
 export const commentCodec = t.intersection([
@@ -26,13 +22,13 @@ export const commentCodec = t.intersection([
 export type Comment = t.TypeOf<typeof commentCodec>
 export type CommentOutput = t.OutputOf<typeof commentCodec>
 
-// export const createCommentCodec = t.type({
-//   authorId: authorIdOutputCodec,
-//   articleSlug: slugCodec,
-//   body: withMessage(
-//     NonEmptyString,
-//     () => 'The body of the comment must not be empty.',
-//   ),
-// })
+export const createCommentCodec = t.type({
+  authorId: authorIdOutputCodec,
+  articleSlug: slugCodec,
+  body: withMessage(
+    NonEmptyString,
+    () => 'The body of the comment must not be empty.',
+  ),
+})
 
-// export type CreateComment = t.TypeOf<typeof createCommentCodec>
+export type CreateComment = t.TypeOf<typeof createCommentCodec>
