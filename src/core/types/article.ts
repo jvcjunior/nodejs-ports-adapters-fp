@@ -2,6 +2,7 @@ import { slugCodec, dateCodec, positiveCodec } from '@/core/types/scalar'
 import { tagCodec } from '@/core/types/tag'
 import { profileCodec } from '@/core/types/profile'
 import * as t from 'io-ts'
+import { withMessage } from 'io-ts-types'
 
 const articleCodecRequired = t.type({
   slug: slugCodec,
@@ -34,24 +35,24 @@ export const articlesCodec = t.type({
 
 export type Articles = t.TypeOf<typeof articlesCodec>
 
-// const createArticleCodecRequired = t.type({
-//   title: withMessage(t.string, () => 'Invalid title'),
-//   description: withMessage(t.string, () => 'Invalid description'),
-//   body: withMessage(t.string, () => 'Invalid body'),
-//   authorId: authorIdOutputCodec,
-// })
+const createArticleCodecRequired = t.type({
+  title: withMessage(t.string, () => 'Invalid title'),
+  description: withMessage(t.string, () => 'Invalid description'),
+  body: withMessage(t.string, () => 'Invalid body'),
+  authorId: t.string, // authorIdOutputCodec,
+})
 
-// const createArticleCodecOptional = t.partial({
-//   tagList: t.array(tagCodec),
-// })
+const createArticleCodecOptional = t.partial({
+  tagList: t.array(tagCodec),
+})
 
-// export const createArticleCodec = t.intersection([
-//   createArticleCodecRequired,
-//   createArticleCodecOptional,
-// ])
+export const createArticleCodec = t.intersection([
+  createArticleCodecRequired,
+  createArticleCodecOptional,
+])
 
-// export type CreateArticle = t.TypeOf<typeof createArticleCodec>
-// export type CreateArticleOutput = t.OutputOf<typeof createArticleCodec>
+export type CreateArticle = t.TypeOf<typeof createArticleCodec>
+export type CreateArticleOutput = t.OutputOf<typeof createArticleCodec>
 
 // const updateArticleRequired = t.type({
 //   slug: slugCodec,
