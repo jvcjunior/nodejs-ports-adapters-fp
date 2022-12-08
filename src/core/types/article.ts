@@ -39,7 +39,7 @@ const createArticleCodecRequired = t.type({
   title: withMessage(t.string, () => 'Invalid title'),
   description: withMessage(t.string, () => 'Invalid description'),
   body: withMessage(t.string, () => 'Invalid body'),
-  authorId: t.string, // authorIdOutputCodec,
+  // authorId: t.string, // authorIdOutputCodec,
 })
 
 const createArticleCodecOptional = t.partial({

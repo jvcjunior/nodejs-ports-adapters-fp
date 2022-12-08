@@ -7,7 +7,7 @@ const data: CreateArticle = {
   title: 'Article title',
   body: 'Article body',
   description: 'Article description',
-  authorId: 'd6562b7f-0543-4d42-b294-1a1619a0ae32',
+  // authorId: 'd6562b7f-0543-4d42-b294-1a1619a0ae32',
 }
 
 const dataWithTagList: CreateArticle = {
@@ -15,7 +15,7 @@ const dataWithTagList: CreateArticle = {
   body: 'Article body 2',
   description: 'Article description 2',
   tagList: [unsafe('tag1'), unsafe('tag2')],
-  authorId: 'd6562b7f-0543-4d42-b294-1a1619a0ae32',
+  // authorId: 'd6562b7f-0543-4d42-b294-1a1619a0ae32',
 }
 
 const dataWithInvalidTagList: CreateArticle = {
@@ -23,14 +23,14 @@ const dataWithInvalidTagList: CreateArticle = {
   body: 'Article body 3',
   description: 'Article description 3',
   tagList: [unsafe('tag1'), unsafe('3ag2-wrong')],
-  authorId: 'd6562b7f-0543-4d42-b294-1a1619a0ae32',
+  // authorId: 'd6562b7f-0543-4d42-b294-1a1619a0ae32',
 }
 
 const dataWithInvalidTitle: CreateArticle = {
   title: unsafe(1),
   body: 'Article body',
   description: 'Article description',
-  authorId: 'd6562b7f-0543-4d42-b294-1a1619a0ae32',
+  // authorId: 'd6562b7f-0543-4d42-b294-1a1619a0ae32',
 }
 
 const registerOk: OutsideRegisterArticle<string> = async (data: CreateArticle) => {
